@@ -5,8 +5,9 @@ const bcrypt = require('bcryptjs')
 const User = require('../users/users-model')
 const {
   checkUsernameFree,
-  // checkUsernameExists,
   checkPasswordLength,
+  checkUsernameExists,
+  passwordCheck,
 } = require('../auth/auth-middleware')
 
 /**
@@ -58,7 +59,14 @@ router.post('/register', checkUsernameFree, checkPasswordLength, async (req, res
     "message": "Invalid credentials"
   }
  */
-
+router.post('/login', checkUsernameExists, checkPasswordLength, passwordCheck, (req, res, next) => {
+  try {
+    req.session.user = req.body.user
+    res.json({ message: `welcome, ${req.body.user}` })
+  } catch (error) {
+    next(error)
+  }
+})
 
 /**
   3 [GET] /api/auth/logout
