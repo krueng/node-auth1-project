@@ -86,7 +86,7 @@ async function passwordCheck(req, res, next) {
   if (!comparePassword) {
     return next({
       status: 401,
-      message: 'Invalid creddentials'
+      message: 'Invalid credentials'
     })
   }
   next()
@@ -101,3 +101,4 @@ module.exports = {
   checkPasswordLength,
   passwordCheck,
 }
+

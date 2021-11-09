@@ -2,8 +2,8 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 
- const session = require('express-session')
- const Store = require('connect-session-knex')(session)
+const session = require('express-session')
+const Store = require('connect-session-knex')(session)
 
 const userRouter = require('./users/users-router')
 const authRouter = require('./auth/auth-router')
@@ -30,7 +30,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use(session({
-  name: 'bue',
+  name: 'chocolatechip',
   secret: process.env.SESSION_SECRET || 'keep it secret',
   cookie: {
     maxAge: 1000 * 60,
