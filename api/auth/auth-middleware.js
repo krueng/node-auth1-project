@@ -35,6 +35,7 @@ async function checkUsernameFree(req, res, next) {
       message: 'Username taken'
     })
   }
+  next()
 }
 
 /*
@@ -54,6 +55,7 @@ async function checkUsernameExists(req, res, next) {
       message: 'Invalid credentials'
     })
   }
+  next()
 }
 
 /*
@@ -73,6 +75,7 @@ function checkPasswordLength(req, res, next) {
       message: 'Password must be longer than 3 chars'
     })
   }
+  next()
 }
 
 // Don't forget to add these to the `exports` object so they can be required in other modules
