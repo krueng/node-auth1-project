@@ -1,3 +1,4 @@
+const path = require ('path')
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -10,7 +11,7 @@ const authRouter = require('./auth/auth-router')
 
 const server = express()
 
-
+server.use(express.static(path.join(__dirname, '../client')))
 /**
  Do what needs to be done to support sessions with the `express-session` package!
  To respect users' privacy, do NOT send them a cookie unless they log in.
@@ -52,8 +53,12 @@ server.use('/api/users', userRouter)
 server.use('/api/auth', authRouter)
 
 server.get("/", (req, res) => {
-  res.json({ api: "up" });
+  res.sendFile(path.join(__dirname, '../client', 'index.html'))
 });
+
+server.use('*', (req, res, next) => {
+  next({ status: 404, message: 'not found!' })
+})
 
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
